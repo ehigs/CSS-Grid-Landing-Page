@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <title>Frontend Mentor | Grid landing page</title>
+
+  <!-- Google Fonts for clean modern typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-blue: #1c4dfb;
+      --card-blue: #2352ff;
+      --card-border: rgba(255, 255, 255, 0.12);
+      --text-white: #ffffff;
+      --text-muted: rgba(255, 255, 255, 0.75);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--primary-blue);
+      color: var(--text-white);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    /* Main Container / Wrapper */
+    .landing-wrapper {
+      width: 100%;
+      max-width: 1150px;
+      background-color: var(--primary-blue);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Top Navigation bar */
+    .nav-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2.5rem 3rem 1.5rem 3rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: -0.2px;
+    }
+
+    .brand-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--text-white);
+      border-radius: 50%;
+    }
+
+    .menu-toggle {
+      background: none;
+      border: none;
+      color: var(--text-white);
+      font-size: 1.25rem;
+      cursor: pointer;
+      letter-spacing: 2px;
+      font-weight: 700;
+      padding: 4px;
+    }
+
+    /* Main Grid Layout */
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid var(--card-border);
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    /* Left Hero Column */
+    .hero-section {
+      padding: 3.5rem 3rem 4rem 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 1px solid var(--card-border);
+    }
+
+    .hero-title {
+      font-size: clamp(2.5rem, 4vw, 3.75rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      margin-bottom: 2rem;
+    }
+
+    .hero-description {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+      max-width: 440px;
+    }
+
+    /* Right Stats Grid (2x2) */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+    }
+
+    .stat-card {
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 1px solid var(--card-border);
+      border-bottom: 1px solid var(--card-border);
+      position: relative;
+    }
+
+    .stat-card:nth-child(even) {
+      border-right: none;
+    }
+
+    .stat-card:nth-child(n+3) {
+      border-bottom: none;
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 2.5rem;
+    }
+
+    .stat-icon {
+      color: var(--text-white);
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: -1px;
+    }
+
+    .stat-label-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .stat-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .stat-subtitle {
+      font-size: 0.825rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Footer Section */
+    .footer-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.75rem 3rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Attribution styles */
+    .attribution {
+      font-size: 11px;
+      text-align: center;
+      margin-top: 1.5rem;
+      color: rgba(255, 255, 255, 0.6);
+    }
+    .attribution a {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 900px) {
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-section {
+        border-right: none;
+        border-bottom: 1px solid var(--card-border);
+        padding: 3rem 2rem;
+      }
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+      .stat-card {
+        border-right: none !important;
+        border-bottom: 1px solid var(--card-border) !important;
+      }
+      .stat-card:last-child {
+        border-bottom: none !important;
+      }
+      .nav-bar, .footer-bar {
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+      body {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="landing-wrapper">
+    <!-- Nav -->
+    <header class="nav-bar">
+      <div class="brand">
+        <span class="brand-dot"></span>
+        Bridge Collective
+      </div>
+      <button class="menu-toggle" aria-label="Toggle Menu">=</button>
+    </header>
+
+    <!-- Main Content Grid -->
+    <div class="content-grid">
+      <!-- Hero -->
+      <section class="hero-section">
+        <h1 class="hero-title">A classroom for every child.</h1>
+        <p class="hero-description">
+          We fund the schools, train the teachers, and measure what works — so every child we reach today becomes a graduate tomorrow.
+        </p>
+      </section>
+
+      <!-- Stats Grid -->
+      <div class="stats-grid">
+        <!-- Stat 1 -->
+        <div class="stat-card">
+          <div class="card-top">
+            <span class="stat-icon">✦</span>
+            <div class="stat-number">2.4M</div>
+          </div>
+          <div class="stat-label-group">
+            <h3 class="stat-title">Students reached</h3>
+            <p class="stat-subtitle">Across 31 countries since 2011.</p>
+          </div>
+        </div>
+
+        <!-- Stat 2 -->
+        <div class="stat-card">
+          <div class="card-top">
+            <span class="stat-icon">+</span>
+            <div class="stat-number">1,284</div>
+          </div>
+          <div class="stat-label-group">
+            <h3 class="stat-title">Schools partnered</h3>
+            <p class="stat-subtitle">In 14 countries, from Kenya to Guatemala.</p>
+          </div>
+        </div>
+
+        <!-- Stat 3 -->
+        <div class="stat-card">
+          <div class="card-top">
+            <span class="stat-icon">→</span>
+            <div class="stat-number">38K</div>
+          </div>
+          <div class="stat-label-group">
+            <h3 class="stat-title">Teachers trained</h3>
+            <p class="stat-subtitle">Equipped with modern tools and methodology.</p>
+          </div>
+        </div>
+
+        <!-- Stat 4 -->
+        <div class="stat-card">
+          <div class="card-top">
+            <span class="stat-icon">≈</span>
+            <div class="stat-number">3.1×</div>
+          </div>
+          <div class="stat-label-group">
+            <h3 class="stat-title">Graduation lift</h3>
+            <p class="stat-subtitle">Partner schools outperform national averages 3x.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-bar">
+      <span>© 2026 Bridge Collective</span>
+      <span>Registered charity 12345678</span>
+    </footer>
+  </div>
+
+  <!-- Menu panel — hidden until the hamburger is activated -->
+  <!-- 
+    About
+    Our Work
+    Partners
+    Annual Report
+    Donate
+  -->
+
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+    Coded by <a href="#">Mark.O</a>.
+  </div>
+
+</body>
+</html>
